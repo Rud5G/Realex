@@ -1,3 +1,15 @@
 <config>
+    <modules>
+        <StudioForty9_Realex>
+            <version>3.0.0</version>
+        </StudioForty9_Realex>
+    </modules>
 
+    <phpunit>
+        <suite>
+            <modules>
+                <StudioForty9_Realex/>
+            </modules>
+        </suite>
+    </phpunit>
 </config>

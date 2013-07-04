@@ -12,4 +12,30 @@
             </modules>
         </suite>
     </phpunit>
+
+	<global>
+        <models>
+            <realex>
+                <class>StudioForty9_Realex_Model</class>
+            </realex>
+        </models>
+
+		<blocks>
+           <realex>
+               <class>StudioForty9_Realex_Block</class>
+           </realex>
+		</blocks>
+	</global>
+	
+	<frontend>
+        <routers>
+            <realex>
+                <use>standard</use>
+                <args>
+                    <module>StudioForty9_Realex</module>
+                    <frontName>realex</frontName>
+                </args>
+            </realex>
+        </routers>
+	</frontend>
 </config>

@@ -3,13 +3,17 @@ Feature: Realex Module Configuration
    As an admin
    I should be able to configure the module from the Magento System Configuration
 
+   @now @admin @javascript
    Scenario: Admin enables the module
-      Given I am logged in to the Magento backend
-      And I am on the System Configuration page
-      When I visit "Payment Methods"
+      Given I am logged in as admin user "admin" identified by "password1"
+      When I go to "/admin/system_config/index"
+      Then I should see "Current Configuration Scope"
+      When I follow "Payment Methods"
       Then I should see "Realex"
+      When I follow "Realex"
+      Then I should see "Enabled"
 
-      When I select "Yes" from "Enabled"
+      When I select "Yes" from "payment_realex_active"
       Then I should see "Title"
       And I should see "Use 3D Secure?"
       And I should see "Mode"
@@ -43,5 +47,5 @@ Feature: Realex Module Configuration
       When I select "No" from "Use TSS?"
       Then I should not see "TSS Score Threshold"
 
-      When I select "No" from "Enabled"
+      When I select "No" from "payment_realex_active"
       Then I should not see "Title"

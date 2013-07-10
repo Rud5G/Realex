@@ -25,6 +25,12 @@
                <class>StudioForty9_Realex_Block</class>
            </realex>
 		</blocks>
+		
+		<helpers>
+			<realex>
+				<class>StudioForty9_Realex_Helper</class>
+			</realex>
+		</helpers>
 	</global>
 	
 	<frontend>

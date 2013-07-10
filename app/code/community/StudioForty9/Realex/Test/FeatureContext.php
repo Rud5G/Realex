@@ -35,6 +35,28 @@ class StudioForty9_Realex_Test_FeatureContext extends \Behat\MinkExtension\Conte
     }
 
     /**
+     * @BeforeScenario @admin
+     */
+    public function disableAdminSecretKey()
+    {
+        //turn off secret key
+        Mage::app()->getConfig()
+            ->saveConfig('admin/security/use_form_key', 0)
+            ->reinit();
+    }
+
+    /**
+     * @AfterScenario @admin
+     */
+    public function enableAdminSecretKey()
+    {
+        //turn on secret key
+        Mage::app()->getConfig()
+            ->saveConfig('admin/security/use_form_key', 1)
+            ->reinit();
+    }
+
+    /**
      * @BeforeFeature
      */
     public static function deleteOldScreenshots($event)
@@ -49,8 +71,9 @@ class StudioForty9_Realex_Test_FeatureContext extends \Behat\MinkExtension\Conte
     /**
      * @AfterScenario
      */
-    public function takeScreenshotForFailedScenario($event){
-        if($event->getResult() === 4){
+    public function takeScreenshotForFailedScenario($event)
+    {
+        if ($event->getResult() === 4) {
             $driver = $this->getSession()->getDriver();
             if ($driver instanceof Selenium2Driver) {
                 $this->saveScreenshot(null, Mage::getBaseDir() . '/var/screenshots');

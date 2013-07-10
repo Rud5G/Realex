@@ -26,7 +26,8 @@ class SF9_Realex_Block_Redirect_Form extends Mage_Payment_Block_Form
     /**
      * _construct()
      *
-     * @todo Explain why we're not using __construct() here...
+     * see the following URL for an explanation of __construct() versus _construct()
+     * http://www.magentocommerce.com/boards/viewthread/76027/#t282659
      * @return void
      */
     protected function _construct()

@@ -26,7 +26,9 @@ class Studioforty9_Realex_RedirectController extends Mage_Core_Controller_Front_
 	/**
      * indexAction()
      *
-     * Called when ...
+     * This would be the action for the placeOrderRedirectUrl - that is the URL that is redirected to
+     * after the customer clicks Place Order. This action would display and auto-submit the form that
+     * is sent to Realex.
      *
      * @return void
      */
@@ -38,7 +40,9 @@ class Studioforty9_Realex_RedirectController extends Mage_Core_Controller_Front_
     /**
      * cancelAction()
      *
-     * Called when ...
+     * This action may not be necessary depending on how the Response URL is handled.
+     *
+     * @todo Decide how we're going to handle the Response URL
      *
      * @return void
      */

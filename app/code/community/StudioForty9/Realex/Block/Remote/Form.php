@@ -26,7 +26,8 @@ class Studioforty9_Realex_Block_Remote_Form extends Mage_Payment_Block_Form_Cc
     /**
      * _construct()
      *
-     * Explain why we're not using __construct() here...
+     * see the following URL for an explanation of __construct() versus _construct()
+     * http://www.magentocommerce.com/boards/viewthread/76027/#t282659
      *
      * @return void
      */
@@ -48,13 +49,17 @@ class Studioforty9_Realex_Block_Remote_Form extends Mage_Payment_Block_Form_Cc
      *
      * Generate years for display in an HTML select box
      *
-     * Questions:
-     * Why do this?
-     * Where is this used?
-     * Is there anywhere that this is already done?
+     * @deprecated
+     * There is actually a core method that handles this functionality
+     * Mage_Payment_Block_Form_Cc::getSsStartYears()
+     * This is for Switch and Solo cards as they have a start date as well
+     * as an expiry date.
+     * This is used on the form for the Remote method in the payment step of the checkout
      *
      * @todo Test that this method returns an array of 10 years
      * @todo Test that the array returned contains the correct years
+     *
+     * @todo Remove this method
      *
      * @return array
      */

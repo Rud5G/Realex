@@ -21,4 +21,9 @@ class StudioForty9_Realex_Test_Config_Main extends EcomDev_PHPUnit_Test_Case_Con
     {
         $this->assertBlockAlias('realex/redirect_form', 'StudioForty9_Realex_Block_Redirect_Form');
     }
+
+    public function testHelpers()
+    {
+        $this->assertHelperAlias('realex', 'StudioForty9_Realex_Helper_Data');
+    }
 }

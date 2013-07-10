@@ -52,10 +52,22 @@ class Studioforty9_Realex_Model_Redirect extends Mage_Payment_Model_Method_Abstr
 	/**
 	 * assignData()
 	 *
-	 * This method is required by Magento to assign data...
-	 *
-	 * @todo Explain in greater detail how this method works.
-	 * @todo Explain in greater detail how Magento uses this method.
+	 * This method is required by Magento to assign the data entered in the payment step
+     * of the checkout into the payment object attached to the quote (and ultimately the order)
+     *
+     * In Checkout/controllers/OnepageController.php on line 509 we have
+     * $this->getOnepage()->getQuote()->getPayment()->importData($data);
+     *
+     * This payment that calls importData() is Mage_Sales_Model_Quote_Payment and on line 154
+     * $method->assignData($data) is called
+     * where $method is the currently chosen payment method (i.e., an object of this class)
+     *
+     * For the redirect method, as there is no information entered by the customer in the checkout
+     * this module doesn't really do anything. That is except in the case where Amex is enabled in
+     * which case the customer needs to indicate prior to placing the order whether they intend to
+     * use Amex or not, as a different subaccount needs to be sent over to Realex when the redirect
+     * occurs.
+     *
 	 * @param  Varien_Object $data
 	 * @return Studioforty9_Realex_Model_Redirect
 	 */
@@ -76,8 +88,11 @@ class Studioforty9_Realex_Model_Redirect extends Mage_Payment_Model_Method_Abstr
 	 *
 	 * Get checkout session namespace.
 	 *
+     * This method may not be necessary
 	 * @todo Explain why we get the checkout namespace.
 	 * @todo Refactor the method name to getCheckoutNamespace()
+     *
+     * @todo Remove this method
 	 * 
 	 * @return Mage_Checkout_Model_Session
 	 */
@@ -90,6 +105,9 @@ class Studioforty9_Realex_Model_Redirect extends Mage_Payment_Model_Method_Abstr
 	 * getQuote()
 	 *
 	 * Get current quote
+     * This method may not be necessary
+     *
+     * @todo Remove this method
 	 *
 	 * @return Mage_Sales_Model_Quote
 	 */
@@ -101,9 +119,8 @@ class Studioforty9_Realex_Model_Redirect extends Mage_Payment_Model_Method_Abstr
 	/**
 	 * canUseInternal()
 	 *
-	 * Using internal pages for input payment data.
-	 *
-	 * @todo Explain why one would use an internal page for input payment data.
+	 * This determines whether the payment method can be used from the Admin.
+     * For redirect methods, this should be set to false.
 	 *
 	 * @return bool
 	 */
@@ -115,9 +132,9 @@ class Studioforty9_Realex_Model_Redirect extends Mage_Payment_Model_Method_Abstr
 	/**
 	 * canUseForMultishipping()
 	 *
-	 * Using for multiple shipping address
-	 *
-	 * @todo Explain why one would use an internal page for input payment data.
+	 * This determines whether the payment method can be used from the MultiShipping Checkout.
+	 * Most redirect methods (including Paypal) don't allow the use of the MultiShipping Checkout.
+     * I'm not entirely sure why.
 	 *
 	 * @return bool
 	 */
@@ -129,7 +146,13 @@ class Studioforty9_Realex_Model_Redirect extends Mage_Payment_Model_Method_Abstr
 	/**
 	 * createFormBlock()
 	 *
-	 * @todo Explain why _this_ method is in _this_ class.
+	 * This method does not need to be here. It has been copied from the Paypal module.
+     * Ultimately, the form is displayed by Mage_Checkout_Block_Onepage_Payment_Methods
+     * calling getPaymentMethodFormHtml() on line 72 which has the following code:
+     * $this->getChildHtml('payment.method.' . $method->getCode());
+     * This could just as easily be managed by layout XML
+     *
+     * @todo move this method
 	 *
 	 * @param  string $name
 	 * @return Mage_Core_Block_Abstract
@@ -204,9 +227,18 @@ class Studioforty9_Realex_Model_Redirect extends Mage_Payment_Model_Method_Abstr
 	 * getOrderPlaceRedirectUrl()
 	 *
 	 * @todo Explain why we need to set the credit card type on the session.
-	 * @todo Explain why we need to set the credit card type in this method.
+     * @todo Explain why we need to set the credit card type in this method.
+     * Setting the RealexCcType probabaly isn't necessary. It's currently being used
+     * to check whether Amex was selected in the checkout when creating the form to
+     * be sent to Realex /SF9/Realex/Block/Redirect/Form.php on line 61 of the current module
+     * I think the idea was that this information would not be stored for long enough in the Payment
+     * object to be used when redirecting (as CC number, for example, is wiped in the meantime).
+     * But this shouldn't be the case for the CC Type.
+     *
+
 	 * @todo Explain why we cant set the secure url to false.
-	 *
+	 * It actually should be fine to use false.
+     *
 	 * @return string
 	 */
 	public function getOrderPlaceRedirectUrl()
@@ -228,7 +260,20 @@ class Studioforty9_Realex_Model_Redirect extends Mage_Payment_Model_Method_Abstr
 	 * getCheckoutRedirectUrl()
 	 *
 	 * @todo Explain why this method is different to getOrderPlaceRedirectUrl.
+     * We should probably remove this method or else decide to implement it properly.
+     * The difference with this method is that it will do the redirect at the point of
+     * clicking "Continue" at the payment step of the checkout. On returning from Realex
+     * we would then need to present a page to the customer to "confirm" their order and
+     * accept any applicable terms and conditions. Allowing this path would also force us
+     * to make the redirect an authorise only transaction, and if the customer were to
+     * subsequently confirm the order, we would then look to see if "settle immediately"
+     * was chosen in the Realex configuration and if "yes", that a subsequent XML based
+     * capture request would be sent.
+     *
 	 * @todo Explain why we cant set the secure url to false.
+     * It actually should be fine to use false.
+     *
+     * @todo Decide whether we are going to implement this functionality
 	 * @return string
 	 *
 	public function getCheckoutRedirectUrl()
@@ -243,6 +288,10 @@ class Studioforty9_Realex_Model_Redirect extends Mage_Payment_Model_Method_Abstr
 	 * The getSuccessUrl is used by x to do x
 	 *
 	 * @todo Explain why _this_ method is in _this_ class.
+     * This probably should be renamed at least as it's the Response URL for Realex.
+     * This method is called when the form for the redirect is being created.
+     * There's no need for this method to be in this class
+     *
 	 * @return string
 	 */
 	public function getSuccessUrl()
@@ -256,6 +305,9 @@ class Studioforty9_Realex_Model_Redirect extends Mage_Payment_Model_Method_Abstr
 	 * The getSuccessUrl is used by x to do x
 	 *
 	 * @todo Explain why _this_ method is in _this_ class.
+     * This method is not used
+     *
+     * @todo Remove this method
 	 * @return string
 	 */
 	public function getCancelUrl()
@@ -269,6 +321,9 @@ class Studioforty9_Realex_Model_Redirect extends Mage_Payment_Model_Method_Abstr
 	 * The getSuccessUrl is used by x to do x
 	 *
 	 * @todo Explain why _this_ method is in _this_ class.
+     * This method is called when the form for the redirect is being created.
+     * There's no need for this method to be in this class
+     *
 	 * @return string
 	 */
 	public function getRealexUrl()
@@ -293,6 +348,11 @@ class Studioforty9_Realex_Model_Redirect extends Mage_Payment_Model_Method_Abstr
 	 *
 	 * @todo Check the type of $paymentAction
 	 * @todo Explain what _this_ method is doing and why _this_ method is in _this_ class.
+     *
+     * I'm not sure what the purpose of this is. It's called on line 299 of
+     * Mage_Sales_Model_Order_Payment. I'd say we can remove it until we have a use
+     * case for why it might be needed. This also goes for the method above.
+     *
 	 * @param  string $paymentAction
 	 * @param  object $stateObject
 	 * @return void

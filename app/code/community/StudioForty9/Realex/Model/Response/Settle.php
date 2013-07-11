@@ -23,13 +23,13 @@
  */
 class Studioforty9_Realex_Model_Response_Settle extends Studioforty9_Realex_Model_Response 
 {
-	/**
+    /**
      * Default response attributes
      *
      * @var array $_data
      * @access protected
      */
     protected $_data = array(
-    	'merchant_id' => null
+        'merchant_id' => null
     );
 }

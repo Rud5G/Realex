@@ -23,9 +23,8 @@
  */
 class Studioforty9_Realex_Model_Request extends Varien_Object
 {
-	public function getSignature()
-	{
-		
-	}
-
+    public function getSignature()
+    {
+        
+    }
 }

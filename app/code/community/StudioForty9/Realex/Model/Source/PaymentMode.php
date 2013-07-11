@@ -22,6 +22,11 @@
  */
 class StudioForty9_Realex_Model_Source_PaymentMode
 {
+    /**
+     * Returns an array of payment modes.
+     *
+     * @return array
+     */
     public function toOptionArray()
     {
         return array(
@@ -32,9 +37,7 @@ class StudioForty9_Realex_Model_Source_PaymentMode
             array(
                 'value' => 'realex/remote',
                 'label' => Mage::helper('realex')->__('Realauth Remote')
-            ),
+            )
          );
     }
 }
-
-?>

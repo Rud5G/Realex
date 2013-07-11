@@ -23,5 +23,5 @@
  */
 class Studioforty9_Realex_Model_Request_Authorize extends Studioforty9_Realex_Model_Request
 {
-
+    
 }

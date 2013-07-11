@@ -20,14 +20,19 @@
  * @package    StudioForty9_Realex
  * @author     Alan Morkan <alan@StudioForty9.ie>
  */
-class StudioForty9_Realex_Model_Source_OrderStatus{
-	
+class StudioForty9_Realex_Model_Source_OrderStatus
+{
+    /**
+     * Returns an array of order stati.
+     *
+     * @return array
+     */
     public function toOptionArray()
     {
         return array(
-	        array('value' => 'canceled', 'label' => Mage::helper('realex')->__('Canceled')),
-            array('value' => 'pending', 'label' => Mage::helper('realex')->__('Pending')),
-            array('value' => 'processing', 'label' => Mage::helper('realex')->__('Processing')),
+            array('value' => 'canceled',   'label' => Mage::helper('realex')->__('Canceled')),
+            array('value' => 'pending',    'label' => Mage::helper('realex')->__('Pending')),
+            array('value' => 'processing', 'label' => Mage::helper('realex')->__('Processing'))
         );
     }
 }

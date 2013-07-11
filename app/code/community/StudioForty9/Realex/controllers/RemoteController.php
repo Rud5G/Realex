@@ -23,7 +23,7 @@
  */
 class Studioforty9_Realex_RemoteController extends Mage_Core_Controller_Front_Action
 {
-	/**
+    /**
      * indexAction()
      *
      * This is probably unnecessary
@@ -37,20 +37,20 @@ class Studioforty9_Realex_RemoteController extends Mage_Core_Controller_Front_Ac
         
     }
     
-	/**
-	 * failureAction()
-	 *
-	 * This is probably no longer necessary as it is better to redirect to the default
+    /**
+     * failureAction()
+     *
+     * This is probably no longer necessary as it is better to redirect to the default
      * Magento success and failure pages as certain events are fired when these pages are loaded
      * and 3rd party modules will depend on this. Also Google Analytics E-commerce tracking
      * code is loaded on the success page.
      *
      * @todo Remove this method and possibly class
-	 * 
-	 * @return void
-	 */
-	public function failureAction()
+     * 
+     * @return void
+     */
+    public function failureAction()
     {
-		
+        
     }
 }

@@ -21,7 +21,6 @@
  * @author     Alan Morkan <alan@StudioForty9.ie>
  */
 class StudioForty9_Realex_Helper_Data extends Mage_Core_Helper_Abstract
-{    
+{
+    
 }
-
-

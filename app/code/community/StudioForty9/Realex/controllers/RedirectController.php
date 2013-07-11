@@ -23,7 +23,7 @@
  */
 class Studioforty9_Realex_RedirectController extends Mage_Core_Controller_Front_Action
 {
-	/**
+    /**
      * indexAction()
      *
      * This would be the action for the placeOrderRedirectUrl - that is the URL that is redirected to
@@ -48,6 +48,6 @@ class Studioforty9_Realex_RedirectController extends Mage_Core_Controller_Front_
      */
     public function cancelAction()
     {
-       
+        
     }
 }

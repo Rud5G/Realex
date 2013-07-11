@@ -22,6 +22,11 @@
  */
 class StudioForty9_Realex_Model_Source_Currency
 {
+    /**
+     * Return an array of options to be used to select currency preferences.
+     *
+     * @return array
+     */
     public function toOptionArray()
     {
         return array(
@@ -32,9 +37,7 @@ class StudioForty9_Realex_Model_Source_Currency
             array(
                 'value' => 'display',
                 'label' => Mage::helper('realex')->__('Use Display Currency')
-            ),
+            )
         );
     }
 }
-
-?>

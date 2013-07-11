@@ -22,6 +22,11 @@
  */
 class StudioForty9_Realex_Model_Source_PaymentAction
 {
+    /**
+     * Returns an array of allowed payment actions.
+     *
+     * @return array
+     */
     public function toOptionArray()
     {
         return array(
@@ -32,9 +37,7 @@ class StudioForty9_Realex_Model_Source_PaymentAction
             array(
                 'value' => Mage_Realex_Model_Remote::ACTION_AUTHORIZE_CAPTURE,
                 'label' => Mage::helper('realex')->__('Settle Immediately')
-            ),
+            )
         );
     }
 }
-
-?>

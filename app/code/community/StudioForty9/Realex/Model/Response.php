@@ -23,19 +23,23 @@
  */
 class Studioforty9_Realex_Model_Response extends Varien_Object
 {
-	/**
+    /**
      * Default response attributes
      *
      * @var array $_data
      * @access protected
      */
     protected $_data = array(
-    	'merchant_id' => null
+        'merchant_id' => null
     );
     
+    /**
+     * Is the response valid? Do the hashes match?
+     *
+     * @return bool
+     */
     public function isValid()
     {
-	    return false;
+        return false;
     }
-    
 }

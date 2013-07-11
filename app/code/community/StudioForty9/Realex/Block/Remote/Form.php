@@ -65,22 +65,10 @@ class Studioforty9_Realex_Block_Remote_Form extends Mage_Payment_Block_Form_Cc
      */
     public function getCcStartYears()
     {
-    	$years = array();
-        $first = date("Y"); // 2013
-		// for 0; 0<10;
+        $years = array();
+        $first = date("Y");
+        
         for ($index = 0; $index < 10; $index++) {
-        	// year = 2013 - 0 = 2013
-        	// year = 2013 - 1 = 2012
-        	// year = 2013 - 2 = 2011
-        	// year = 2013 - 3 = 2010
-			// year = 2013 - 4 = 2009
-			// year = 2013 - 5 = 2008
-			// year = 2013 - 6 = 2007
-			// year = 2013 - 7 = 2006
-			// year = 2013 - 8 = 2005
-			// year = 2013 - 9 = 2004
-            $year = $first - $index; // Should $this be $year = $first + $index;?
-            // array[2004] = 2004
             $years[$year] = $year;
         }
 

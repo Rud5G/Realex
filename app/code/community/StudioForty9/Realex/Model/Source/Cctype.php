@@ -22,6 +22,11 @@
  */
 class StudioForty9_Realex_Model_Source_Cctype extends Mage_Payment_Model_Source_Cctype
 {
+    /**
+     * Return an array of allowed credit card types.
+     *
+     * @return array
+     */
     public function getAllowedTypes()
     {
         return array('VI', 'MC', 'AE', 'LA', 'SS', 'EL');
